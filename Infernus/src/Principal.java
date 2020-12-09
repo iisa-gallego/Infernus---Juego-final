@@ -1,3 +1,5 @@
+import javax.swing.border.StrokeBorder;
+
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -46,12 +48,22 @@ public class Principal extends PApplet{
 	
 	@Override
 	public void draw() {
+	
 		
 		if (inicio == true) {
 			image(inicial, 0, 0);
+			if (dist(mouseX, mouseY, 745,450)<50) {//Para que marque cuando estoy sobre el botón
+				strokeWeight(5);
+				stroke(255);
+				noFill();
+				rect(615,415,253,56,15);
+			}
 		}
 		if (cargando==true) {
 			image(cargar, 0, 0);
+			float s =map (second(), 50,60 ,0, width);
+			fill(255);
+			rect(0,0,s,20);
 		}
 		
 		if (nivel1 == true) {
@@ -60,6 +72,7 @@ public class Principal extends PApplet{
 		}
 
 	}
+	
 	
 	@Override
 	public void mousePressed() {
