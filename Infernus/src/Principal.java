@@ -27,8 +27,8 @@ public class Principal extends PApplet{
 	PImage cargar;
 	boolean inicio, nivel1, nivel2, nivel3, nivel4, nivel5, nivel6, nivel7, nivel8, nivel9; //Para pasar de un nivel a otro
 	boolean cargando;
+	int reloj;
 
-	
 	@Override
 	public void settings() {
 		size(1200,700);
@@ -37,6 +37,7 @@ public class Principal extends PApplet{
 	@Override
 	public void setup() {
 		kruguer = new Kruguer (0,0,this);		 //Declarar la instancia 
+		reloj =0;
 		
 		inicial = loadImage("Inicio.png");	
 		cargar = loadImage("Cargando.png");
@@ -48,7 +49,6 @@ public class Principal extends PApplet{
 	
 	@Override
 	public void draw() {
-	
 		
 		if (inicio == true) {
 			image(inicial, 0, 0);
@@ -61,16 +61,17 @@ public class Principal extends PApplet{
 		}
 		if (cargando==true) {
 			image(cargar, 0, 0);
-			float s =map (second(), 50,60 ,0, width);
-			fill(255);
-			rect(0,0,s,20);
+			reloj++;
+			if(reloj==100) {
+				nivel1=true;
+
+			}
 		}
 		
 		if (nivel1 == true) {
 			uno.pintar(this);
 			kruguer.pintar(this,0,350);
 		}
-
 	}
 	
 	
