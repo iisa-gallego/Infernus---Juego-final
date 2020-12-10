@@ -17,8 +17,8 @@ public class Principal extends PApplet {
 	ArrayList<Villano> misVillanos;
 
 	Nivel1 uno;
-	/*
-	 * Nivel2 dos; /*Nivel3 tres; Nivel4 cuatro; Nivel5 cinco; Nivel6 seis; Nivel7
+	Nivel2 dos; 
+	/*Nivel3 tres; Nivel4 cuatro; Nivel5 cinco; Nivel6 seis; Nivel7
 	 * siete; Nivel8 ocho; Nivel9 nueve;
 	 */
 
@@ -42,14 +42,18 @@ public class Principal extends PApplet {
 		misVillanos.add(new Caballero(350, 0, this));
 		misVillanos.add(new Caballero(650, 530, this));
 		misVillanos.add(new Caballero(950, 0, this));
+		//Villano nivel 2
+		villanos = new MounstruoAire(1000,50,this);
 
 		reloj = 0;
 
 		inicial = loadImage("Inicio.png");
 		cargar = loadImage("Cargando.png");
 
-		uno = new Nivel1(0, 0, this);
+//LAS PANTALLAS
 		inicio = true;
+		uno = new Nivel1(0, 0, this);
+		dos = new Nivel2(0, 0, this);
 
 	}
 
@@ -79,10 +83,20 @@ public class Principal extends PApplet {
 				misVillanos.get(i).pintar(this); // Llamo el pintar de cada clase que tenga un comportamiento
 				misVillanos.get(i).mover();
 				
-				if (dist(kruger.getX(), kruger.getY(), misVillanos.get(i).getX(),misVillanos.get(i).getY()) < 50) {
+				if (dist(kruger.getX(), kruger.getY(), misVillanos.get(i).getX(),misVillanos.get(i).getY()) < 50) {//El choque y se devuelve
 					kruger.setX(10);
+				}if (kruger.getX()>1050) {
+					nivel2=true;
+					kruger.reset();
+				}
 			}
-			}
+		}
+//NIVEL2
+		if (nivel2 == true) {
+			dos.pintar(this);
+			kruger.pintar(this);
+			villanos.pintar(this);
+			villanos.mover();
 		}
 	}
 
@@ -94,7 +108,6 @@ public class Principal extends PApplet {
 
 	public void keyPressed() {
 		kruger.mover(this);
-
 	}
 
 }

@@ -18,6 +18,11 @@ public class Kruger {
 		app.image(kruguer, x, y);
 	}
 	
+	public void reset () {
+		this.x = 10;
+		this.y = 350;
+	}
+	
 	public void mover(PApplet app) {//mover con las teclas
 		switch (app.key) {
 		case 'd':
