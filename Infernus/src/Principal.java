@@ -12,18 +12,19 @@ public class Principal extends PApplet {
 	}
 
 //INSTANCIAS
-	Kruger kruger; 
-	MounstruoAire remolino;
-	ArrayList<Caballero> misCaballeros;
-//INSTANCIAS PARA PASAR DE NIVEL
+	Kruger kruger;
 	Nivel1 uno;
 	Nivel2 dos; 
 	/*Nivel3 tres; Nivel4 cuatro; Nivel5 cinco; Nivel6 seis; Nivel7
 	 * siete; Nivel8 ocho; Nivel9 nueve;
 	 */
+//ARREGLOS
+	ArrayList<Villano> misCaballeros;
+	ArrayList<Villano> misRemolinos;
 //IMAGENSITAS
 	PImage inicial;
 	PImage cargar;
+	PImage advertencia;
 
 	boolean inicio; 
 	boolean cargando; 
@@ -39,18 +40,26 @@ public class Principal extends PApplet {
 	public void setup() {
 		kruger = new Kruger(0, 0, this); // Declarar la instancia
 	
-		misCaballeros = new ArrayList<Caballero>();
 		// Villano nivel 1
+		misCaballeros = new ArrayList<Villano>();
 		misCaballeros.add(new Caballero(350, 0, this));
 		misCaballeros.add(new Caballero(650, 530, this));
 		misCaballeros.add(new Caballero(950, 0, this));
 		//Villano nivel 2
-		remolino = new MounstruoAire(1000,50,this);
-
+		misRemolinos = new ArrayList<Villano>();
+		misRemolinos.add(new MounstruoAire(1000, 50, this));
+		misRemolinos.add(new MounstruoAire(1000, 250, this));
+		misRemolinos.add(new MounstruoAire(1000, 500, this));
+		misRemolinos.add(new MounstruoAire(1500, 150, this));
+		misRemolinos.add(new MounstruoAire(1500, 400, this));
+	
+		//Tiempo de imagen cargando
 		reloj = 0;
 
+		//imagenes diferentes a los niveles
 		inicial = loadImage("Inicio.png");
 		cargar = loadImage("Cargando.png");
+		advertencia = loadImage("Cuidado.png");
 
 //LAS PANTALLAS
 		inicio = true;
@@ -59,7 +68,8 @@ public class Principal extends PApplet {
 
 	}
 
-	public void draw() {		
+	public void draw() {	
+//PANTALLA DE INICIO
 		switch (pantalla) {
 		case 0:
 			image(inicial, 0, 0);
@@ -70,6 +80,7 @@ public class Principal extends PApplet {
 				rect(615, 415, 253, 56, 15);
 			}
 			break;
+//PANTALLA DE CARGANDO
 		case 1:
 			image(cargar, 0, 0);
 			reloj++;
@@ -87,9 +98,7 @@ public class Principal extends PApplet {
 				misCaballeros.get(i).mover();
 
 				if (dist(kruger.getX(), kruger.getY(), misCaballeros.get(i).getX(),misCaballeros.get(i).getY()) < 100) {//Mensaje de cuidado
-					fill(150,50,0);
-					textSize(50);
-					text("¡Take care",400,400);
+					image(advertencia, -10, 350);
 				}
 				
 				if (dist(kruger.getX(), kruger.getY(), misCaballeros.get(i).getX(),misCaballeros.get(i).getY()) < 50) {//El choque y se devuelve
@@ -100,18 +109,38 @@ public class Principal extends PApplet {
 				pantalla=3;
 				kruger.reset();
 			}
-	
 			break;
 //NIVEL 2
 		case 3:
 			dos.pintar(this);
 			kruger.pintar(this);
-			remolino.pintar(this);
-			remolino.mover();
-			
+			for (int i = 0; i < misRemolinos.size(); i++) {
+				misRemolinos.get(i).pintar(this); // Llamo el pintar de cada clase que tenga un comportamiento
+				misRemolinos.get(i).mover();
+
+				if (dist(kruger.getX(), kruger.getY(), misRemolinos.get(i).getX(),misRemolinos.get(i).getY()) < 100) {//Mensaje de cuidado
+					image(advertencia, -10, 350);
+				}
+				
+				if (dist(kruger.getX(), kruger.getY(), misRemolinos.get(i).getX(),misRemolinos.get(i).getY()) < 50) {//El choque y se devuelve
+					kruger.setX(10);
+				}
+			}
 			if (kruger.getX()>1050) {
+				pantalla=4;
 				kruger.reset();
 			}
+			break;
+//NIVEL3
+		case 4:
+			
+			break;
+//NIVEL4
+		case 5:
+			
+			break;
+		case 6:
+			
 			break;
 		default:
 			break;

@@ -15,10 +15,6 @@ public class MounstruoAire extends Villano {
 	@Override
 	public void pintar(PApplet app) {
 		app.image(remolino, x, y);
-		app.image(remolino, x-100, y+200);
-		app.image(remolino, x+100, y+350);
-		app.image(remolino, x, y+550);
-		
 	}
 	
 	@Override

@@ -23,6 +23,10 @@ public class Kruger {
 		this.y = 350;
 	}
 	
+	public void resbalar() {//ESTE MÉTODO ES PARA EL NIVEL 7
+	
+	}
+	
 	public void mover(PApplet app) {//mover con las teclas
 		switch (app.key) {
 		case 'd':
