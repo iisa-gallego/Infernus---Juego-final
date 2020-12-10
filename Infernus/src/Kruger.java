@@ -39,8 +39,20 @@ public class Kruger {
 		return x;
 	}
 	
-	public static int getY() {
+	public int getY() {
 		return y;
+	}
+
+	public PImage getKruguer() {
+		return kruguer;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public void setY(int y) {
+		this.y = y;
 	}
 }
 	

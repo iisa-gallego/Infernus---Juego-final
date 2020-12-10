@@ -33,10 +33,10 @@ public class Caballero extends Villano {
 		}
 	}
 
-	private int getX() {
+	public int getX() {
 		return x;
 	}
-	private int getY() {
+	public int getY() {
 		return y;
 	}
 }
