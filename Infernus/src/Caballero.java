@@ -1,10 +1,12 @@
+import java.util.ArrayList;
+
 import processing.core.PApplet;
 import processing.core.PImage;
 
 public class Caballero extends Villano {
 	PImage caballero;
 	protected boolean estado0, estado1;
-
+	
 	public Caballero(int x, int y, PApplet app) {
 		super(x, y);
 		caballero = app.loadImage("Caballero.png");
@@ -15,7 +17,7 @@ public class Caballero extends Villano {
 	public void pintar(PApplet app) {
 		app.image(caballero, x, y);
 	}
-
+		
 	public void mover() {
 		if (estado0) {
 			estado1 = false;
