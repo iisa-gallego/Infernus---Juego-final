@@ -79,7 +79,7 @@ public class Principal extends PApplet {
 				misVillanos.get(i).pintar(this); // Llamo el pintar de cada clase que tenga un comportamiento
 				misVillanos.get(i).mover();
 				
-				if (dist(kruger.getX(), kruger.getY(), misVillanos.get(i).getX(),getY() < 20)) {
+				if (dist(kruger.getX(), kruger.getY(), misVillanos.get(i).getX(),misVillanos.get(i).getY()) < 50) {
 					kruger.setX(10);
 			}
 			}
