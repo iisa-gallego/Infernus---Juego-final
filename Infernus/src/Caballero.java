@@ -33,5 +33,8 @@ public class Caballero extends Villano {
 			}
 		}
 	}
+	private void getX() {
+	// TODO Auto-generated method stub
 
+	}
 }
