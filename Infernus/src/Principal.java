@@ -46,7 +46,7 @@ public class Principal extends PApplet{
 		misVillanos = new ArrayList<Villano>();
 		//Villano nivel 1
 		misVillanos.add(new Caballero(350,0,this));
-		misVillanos.add(new Caballero(650,650,this));
+		misVillanos.add(new Caballero(650,530,this));
 		misVillanos.add(new Caballero(950,0,this));
 		
 		reloj =0;

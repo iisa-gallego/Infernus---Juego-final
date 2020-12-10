@@ -20,15 +20,15 @@ public class Caballero extends Villano {
 	public void mover () {
 		if(estado0) {
 			estado1=false;
-			y++;
-			if(y>=650) {
+			y+=3;
+			if(y>=570) {
 			estado1=true;
 			}
 		}
 		if(estado1) {
 			estado0=false;
-			y--;
-			if(y<=50) {
+			y-=5;
+			if(y<=20) {
 			estado0=true;
 			}
 		}
