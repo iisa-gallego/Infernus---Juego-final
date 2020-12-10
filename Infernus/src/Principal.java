@@ -1,4 +1,6 @@
 
+import java.util.ArrayList;
+
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -11,9 +13,13 @@ public class Principal extends PApplet{
 	
 	//Instancias
 	Kruger kruger; //personaje principal
+	Villano villanos;
+	ArrayList<Villano>misVillanos;
+	
+	
 	Nivel1 uno;		
 	/*Nivel2 dos;
-	Nivel3 tres;
+	/*Nivel3 tres;
 	Nivel4 cuatro;
 	Nivel5 cinco;
 	Nivel6 seis;
@@ -35,7 +41,14 @@ public class Principal extends PApplet{
 	
 	@Override
 	public void setup() {
-		kruger = new Kruger (0,0,this);		 //Declarar la instancia 
+		kruger = new Kruger (0,0,this); //Declarar la instancia 
+		
+		misVillanos = new ArrayList<Villano>();
+		//Villano nivel 1
+		misVillanos.add(new Caballero(350,0,this));
+		misVillanos.add(new Caballero(650,650,this));
+		misVillanos.add(new Caballero(950,0,this));
+		
 		reloj =0;
 		
 		inicial = loadImage("Inicio.png");	
@@ -69,13 +82,18 @@ public class Principal extends PApplet{
 		if (nivel1 == true) {
 			uno.pintar(this);
 			kruger.pintar(this);
+			for (int i = 0; i < misVillanos.size(); i++) {
+				misVillanos.get(i).pintar(this); //Llamo el pintar de cada clase que tenga un comportamiento
+				misVillanos.get(i).mover();
+			}
+			
 		}
 	}
 	
 	
 	@Override
 	public void mousePressed() {
-		if (dist(mouseX, mouseY, 745,450)<50) {
+		if (dist(mouseX, mouseY, 745,450)<50) {//botón descender/jugar
 			cargando=true;
 		}
 	}
@@ -83,6 +101,7 @@ public class Principal extends PApplet{
 	@Override
 	public void keyPressed() {
 		kruger.mover(this);
+		
 	}
 	
 	
