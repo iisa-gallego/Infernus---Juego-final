@@ -1,4 +1,3 @@
-import javax.swing.border.StrokeBorder;
 
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -11,7 +10,7 @@ public class Principal extends PApplet{
 	}
 	
 	//Instancias
-	Kruguer kruguer; //personaje principal
+	Kruger kruger; //personaje principal
 	Nivel1 uno;		
 	/*Nivel2 dos;
 	Nivel3 tres;
@@ -27,7 +26,7 @@ public class Principal extends PApplet{
 	PImage cargar;
 	boolean inicio, nivel1, nivel2, nivel3, nivel4, nivel5, nivel6, nivel7, nivel8, nivel9; //Para pasar de un nivel a otro
 	boolean cargando;
-	int reloj;
+	int reloj;//Para que dure cierto tiempo la image de cargando
 
 	@Override
 	public void settings() {
@@ -36,7 +35,7 @@ public class Principal extends PApplet{
 	
 	@Override
 	public void setup() {
-		kruguer = new Kruguer (0,0,this);		 //Declarar la instancia 
+		kruger = new Kruger (0,0,this);		 //Declarar la instancia 
 		reloj =0;
 		
 		inicial = loadImage("Inicio.png");	
@@ -49,7 +48,6 @@ public class Principal extends PApplet{
 	
 	@Override
 	public void draw() {
-		
 		if (inicio == true) {
 			image(inicial, 0, 0);
 			if (dist(mouseX, mouseY, 745,450)<50) {//Para que marque cuando estoy sobre el botón
@@ -62,15 +60,15 @@ public class Principal extends PApplet{
 		if (cargando==true) {
 			image(cargar, 0, 0);
 			reloj++;
-			if(reloj==100) {
+			if(reloj==100) {//que cambia al nivel 1
+				reloj=99;
 				nivel1=true;
-
 			}
 		}
 		
 		if (nivel1 == true) {
 			uno.pintar(this);
-			kruguer.pintar(this,0,350);
+			kruger.pintar(this);
 		}
 	}
 	
@@ -81,4 +79,12 @@ public class Principal extends PApplet{
 			cargando=true;
 		}
 	}
+	
+	@Override
+	public void keyPressed() {
+		kruger.mover(this);
+	}
+	
+	
+	
 }
