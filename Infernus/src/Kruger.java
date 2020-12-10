@@ -39,7 +39,7 @@ public class Kruger {
 		return x;
 	}
 	
-	public int getY() {
+	public static int getY() {
 		return y;
 	}
 }
