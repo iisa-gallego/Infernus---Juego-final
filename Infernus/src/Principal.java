@@ -15,15 +15,11 @@ public class Principal extends PApplet {
 	KrugerBarco krugerB;
 	KrugerBarco sel; // el selector
 	
-	Nivel1 uno;
-	Nivel2 dos; 
-	Nivel3 tres; 
-	Nivel4 cuatro;
-	Nivel5 cinco; 
-	Nivel6 seis;
-	Nivel7 siete;
-	Nivel8 ocho; 
-	Nivel9 nueve;
+	Dracma oro;	Dracma plata;
+	
+	Nivel1 uno; 	Nivel2 dos;		 Nivel3 tres; 
+	Nivel4 cuatro;	Nivel5 cinco;	 Nivel6 seis;
+	Nivel7 siete;	Nivel8 ocho; 	 Nivel9 nueve;
 	
 	Cerbero cerbero;
 	
@@ -36,6 +32,7 @@ public class Principal extends PApplet {
 	PImage cargar;
 	PImage advertencia;
 	PImage instrucciones;
+	PImage text;
 
 	boolean inicio; 
 	boolean cargando; 
@@ -63,6 +60,9 @@ public class Principal extends PApplet {
 		
 		sel = null;
 	
+		plata = new Dracma (0 ,0, this);
+		oro = new Dracma (0,0,this);
+		
 		// Villano nivel 1
 		misCaballeros = new ArrayList<Villano>();
 		misCaballeros.add(new Caballero(350, 0, this));
@@ -91,6 +91,7 @@ public class Principal extends PApplet {
 		cargar = loadImage("Cargando.png");
 		advertencia = loadImage("Cuidado.png");
 		instrucciones = loadImage("Instrucciones.png");
+		text = loadImage("TextoDracma.png");
 
 //LAS PANTALLAS
 		inicio = true;
@@ -136,7 +137,12 @@ public class Principal extends PApplet {
 			break;
 //NIVEL 1	
 		case 2:
+			boolean pintarDracma=true;
 			uno.pintar(this);
+			image (text,0,10);
+			if (pintarDracma=true) {
+				plata.pintar1(this);
+			}
 			kruger.pintar(this);
 			for (int i = 0; i < misCaballeros.size(); i++) {
 				misCaballeros.get(i).pintar(this); // Llamo el pintar de cada clase que tenga un comportamiento

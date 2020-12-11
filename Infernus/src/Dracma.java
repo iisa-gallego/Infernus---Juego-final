@@ -15,8 +15,9 @@ public class Dracma {
 		oro = app.loadImage("DracmaOro.png");
 	}
 
-	public void pintar(PApplet app) {
-		app.image(plata, x, y);
+	public void pintar1(PApplet app) {//Dracmas de plata del nivel 1
+		app.image(plata, 340, y);
+		app.image(plata, 640, 560);
 	}
 	
 	public void pintar(int x, PApplet app) {
