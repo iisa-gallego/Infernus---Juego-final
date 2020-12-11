@@ -15,8 +15,9 @@ public class Principal extends PApplet {
 	Kruger kruger;
 	Nivel1 uno;
 	Nivel2 dos; 
-	/*Nivel3 tres; Nivel4 cuatro; Nivel5 cinco; Nivel6 seis; Nivel7
-	 * siete; Nivel8 ocho; Nivel9 nueve;
+	/*Nivel3 tres; Nivel4 cuatro; Nivel5 cinco; Nivel6 seis; */
+	Nivel7 siete;
+	 /*siete; Nivel8 ocho; Nivel9 nueve;
 	 */
 //ARREGLOS
 	ArrayList<Villano> misCaballeros;
@@ -65,6 +66,7 @@ public class Principal extends PApplet {
 		inicio = true;
 		uno = new Nivel1(0, 0, this);
 		dos = new Nivel2(0, 0, this);
+		siete = new Nivel7(0, 0, this);
 
 	}
 
@@ -127,7 +129,7 @@ public class Principal extends PApplet {
 				}
 			}
 			if (kruger.getX()>1050) {
-				pantalla=4;
+				pantalla=7;
 				kruger.reset();
 			}
 			break;
@@ -139,8 +141,18 @@ public class Principal extends PApplet {
 		case 5:
 			
 			break;
+//NIVEL5
 		case 6:
 			
+			break;
+//NIVEL6
+		case 7:
+			siete.pintar(this);
+			kruger.pintar(this);	
+			break;
+//NIVEL7
+		case 8:
+						
 			break;
 		default:
 			break;
