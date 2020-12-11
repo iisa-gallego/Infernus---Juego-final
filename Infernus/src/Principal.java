@@ -104,8 +104,8 @@ public class Principal extends PApplet {
 		misDracmasOro.add(new Dracma(400, 600, this));
 	
 		misDracmasOro2 = new ArrayList<Dracma>();
-		misDracmasOro2.add(new Dracma(100, 600, this));
-		misDracmasOro2.add(new Dracma(700, 550, this));
+		misDracmasOro2.add(new Dracma(350, 250, this));
+		misDracmasOro2.add(new Dracma(700, 150, this));
 		
 		//Tiempo de imagen cargando
 		reloj = 0;
