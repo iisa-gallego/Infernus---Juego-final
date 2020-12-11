@@ -8,11 +8,12 @@ public class Principal extends PApplet {
 
 	public static void main(String[] args) {
 		PApplet.main("Principal");
-
 	}
 
 //INSTANCIAS
 	Kruger kruger;
+	KrugerBarco krugerBarco;
+	
 	Nivel1 uno;
 	Nivel2 dos; 
 	Nivel3 tres; 
@@ -39,8 +40,8 @@ public class Principal extends PApplet {
 	int reloj;// Para que dure cierto tiempo la imagen de cargando
 //BOLEAN PARA PASAR DE UN NIVEL AL OTRO
 	int pantalla; 
-	
 	int xDescender, yDescender, xInstrucciones, yInstrucciones;
+	
 	@Override
 	public void settings() {
 		size(1200, 700);
@@ -55,6 +56,7 @@ public class Principal extends PApplet {
 		yInstrucciones=491;
 		
 		kruger = new Kruger(0, 0, this); // Declarar la instancia
+		krugerBarco = new KrugerBarco (0,0, this);
 	
 		// Villano nivel 1
 		misCaballeros = new ArrayList<Villano>();
@@ -174,6 +176,11 @@ public class Principal extends PApplet {
 			cerbero.pintar(this);
 			cerbero.mover();
 			
+			if (kruger.getX()>1050) {
+				pantalla=6;
+				kruger.reset();
+			}
+			
 			break;
 //NIVEL4
 		case 5:
@@ -182,6 +189,8 @@ public class Principal extends PApplet {
 //NIVEL5
 		case 6:
 			cinco.pintar(this);
+			krugerBarco.pintar(this);
+			krugerBarco.mover(this);
 			break;
 //NIVEL6
 		case 7:
@@ -225,7 +234,7 @@ public class Principal extends PApplet {
 	}
 
 	public void mousePressed() {
-		if (dist(mouseX, mouseY, xDescender, yDescender) < 50) {// botón descender/jugar
+		if (dist(mouseX, mouseY, 745, 415) < 50) {// botón descender/jugar
 			pantalla = 1;
 		}
 	}
