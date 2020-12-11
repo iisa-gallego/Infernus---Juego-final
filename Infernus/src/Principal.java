@@ -39,13 +39,21 @@ public class Principal extends PApplet {
 	int reloj;// Para que dure cierto tiempo la imagen de cargando
 //BOLEAN PARA PASAR DE UN NIVEL AL OTRO
 	int pantalla; 
-
+	
+	int xDescender, yDescender, xInstrucciones, yInstrucciones;
 	@Override
 	public void settings() {
 		size(1200, 700);
 	}
 
 	public void setup() {
+		//Coordenas del cuadro descender
+		xDescender=615;
+		yDescender=415;
+	
+		xInstrucciones=615;
+		yInstrucciones=491;
+		
 		kruger = new Kruger(0, 0, this); // Declarar la instancia
 	
 		// Villano nivel 1
@@ -90,17 +98,23 @@ public class Principal extends PApplet {
 	}
 
 	public void draw() {	
-
 //PANTALLA DE INICIO
 		switch (pantalla) {
 		case 0:
 			image(inicial, 0, 0);
-			if (dist(mouseX, mouseY, 745, 450) < 50) {// Para que marque cuando estoy sobre el botón
+			if (dist(mouseX, mouseY, 745, 415) < 40) {// Para que marque cuando estoy sobre el botón de play
 				strokeWeight(5);
 				stroke(255);
 				noFill();
 				rect(615, 415, 253, 56, 15);
 			}
+			if (dist(mouseX, mouseY, 745, 520) < 40) {// Para que marque cuando estoy sobre el botón de instrucciones
+				strokeWeight(5);
+				stroke(255);
+				noFill();
+				rect(xInstrucciones, yInstrucciones, 253, 56, 15);
+				}
+		
 			break;
 //PANTALLA DE CARGANDO
 		case 1:
@@ -211,7 +225,7 @@ public class Principal extends PApplet {
 	}
 
 	public void mousePressed() {
-		if (dist(mouseX, mouseY, 745, 450) < 50) {// botón descender/jugar
+		if (dist(mouseX, mouseY, xDescender, yDescender) < 50) {// botón descender/jugar
 			pantalla = 1;
 		}
 	}
