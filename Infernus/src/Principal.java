@@ -137,12 +137,8 @@ public class Principal extends PApplet {
 			break;
 //NIVEL 1	
 		case 2:
-			boolean pintarDracma=true;
 			uno.pintar(this);
-			image (text,0,10);
-			if (pintarDracma=true) {
-				plata.pintar1(this);
-			}
+			plata.pintar1(this);
 			kruger.pintar(this);
 			for (int i = 0; i < misCaballeros.size(); i++) {
 				misCaballeros.get(i).pintar(this); // Llamo el pintar de cada clase que tenga un comportamiento
@@ -201,7 +197,7 @@ public class Principal extends PApplet {
 			kruger.pintar(this);
 			
 			if (kruger.getX()>1000) {//INSERTAR QUE DEBE PASAR PARA SEGUIR AL OTRO NIVEL
-				pantalla=7;
+				pantalla=6;
 				kruger.reset();
 			}	
 			break;
@@ -210,6 +206,10 @@ public class Principal extends PApplet {
 			cinco.pintar(this);
 			krugerB.pintar(this);
 			
+			if (mouseX>900) {//INSERTAR QUE DEBE PASAR PARA SEGUIR AL OTRO NIVEL
+				pantalla=7;
+				kruger.reset();
+			}	
 			break;
 //NIVEL6
 		case 7:

@@ -8,14 +8,16 @@ public class KrugerBarco {
 	PImage kruguerB;
 
 	public KrugerBarco(int x, int y, PApplet app) {// constructor
-		this.x = 10;
+		this.x = 100;
 		this.y = 350;
-		this.dist=30;
+		this.dist=50;
 		kruguerB = app.loadImage("KrugerBarco.png");
 	}
 	
 	public void pintar(PApplet app) { // app cuenta como objeto de PApplet
+		app.imageMode(app.CENTER);
 		app.image(kruguerB, x, y);
+		app.imageMode(app.CORNER);
 	}
 	
 	public void mover(PApplet app) {//mover con las teclas
