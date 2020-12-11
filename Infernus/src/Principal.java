@@ -15,13 +15,17 @@ public class Principal extends PApplet {
 	Kruger kruger;
 	Nivel1 uno;
 	Nivel2 dos; 
-	/*Nivel3 tres; Nivel4 cuatro; Nivel5 cinco; Nivel6 seis; */
+	Nivel3 tres; 
+	//Nivel4 cuatro;
+	Nivel5 cinco; 
+	/*Nivel6 seis; */
 	Nivel7 siete;
 	 /*siete; Nivel8 ocho; Nivel9 nueve;
 	 */
 //ARREGLOS
 	ArrayList<Villano> misCaballeros;
 	ArrayList<Villano> misRemolinos;
+	ArrayList<Villano> misFlechas;
 //IMAGENSITAS
 	PImage inicial;
 	PImage cargar;
@@ -51,8 +55,13 @@ public class Principal extends PApplet {
 		misRemolinos.add(new MounstruoAire(1000, 50, this));
 		misRemolinos.add(new MounstruoAire(1000, 250, this));
 		misRemolinos.add(new MounstruoAire(1000, 500, this));
-		misRemolinos.add(new MounstruoAire(1500, 150, this));
-		misRemolinos.add(new MounstruoAire(1500, 400, this));
+		misRemolinos.add(new MounstruoAire(1700, 150, this));
+		misRemolinos.add(new MounstruoAire(1700, 400, this));
+		//Villano nivel 2
+		misFlechas = new ArrayList<Villano>();
+		misFlechas.add(new ArmaCentauro(1000, 50, this));
+		misFlechas.add(new ArmaCentauro(1000, 300, this));
+		misFlechas.add(new ArmaCentauro(1000, 550, this));
 	
 		//Tiempo de imagen cargando
 		reloj = 0;
@@ -66,6 +75,8 @@ public class Principal extends PApplet {
 		inicio = true;
 		uno = new Nivel1(0, 0, this);
 		dos = new Nivel2(0, 0, this);
+		tres = new Nivel3(0,0, this);
+		cinco = new Nivel5(0,0, this);
 		siete = new Nivel7(0, 0, this);
 
 	}
@@ -129,12 +140,14 @@ public class Principal extends PApplet {
 				}
 			}
 			if (kruger.getX()>1050) {
-				pantalla=7;
+				pantalla=6;
 				kruger.reset();
 			}
 			break;
 //NIVEL3
 		case 4:
+			tres.pintar(this);
+			kruger.pintar(this);
 			
 			break;
 //NIVEL4
@@ -143,12 +156,28 @@ public class Principal extends PApplet {
 			break;
 //NIVEL5
 		case 6:
-			
+			cinco.pintar(this);
 			break;
 //NIVEL6
 		case 7:
 			siete.pintar(this);
 			kruger.pintar(this);	
+			for (int i = 0; i < misFlechas.size(); i++) {
+				misFlechas.get(i).pintar(this); // Llamo el pintar de cada clase que tenga un comportamiento
+				misFlechas.get(i).mover();
+
+				if (dist(kruger.getX(), kruger.getY(), misFlechas.get(i).getX(),misFlechas.get(i).getY()) < 100) {//Mensaje de cuidado
+					image(advertencia, -10, 350);
+				}
+				
+				if (dist(kruger.getX(), kruger.getY(), misFlechas.get(i).getX(),misFlechas.get(i).getY()) < 50) {//El choque y se devuelve
+					kruger.setX(10);
+				}
+			}
+			if (kruger.getX()>1050) {
+				pantalla=8;
+				kruger.reset();
+			}
 			break;
 //NIVEL7
 		case 8:
