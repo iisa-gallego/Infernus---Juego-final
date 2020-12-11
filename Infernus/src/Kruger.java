@@ -8,18 +8,20 @@ public class Kruger {
 	PImage kruguer;
 
 	public Kruger(int x, int y, PApplet app) {// constructor
-		this.x = 10;
+		this.x = 40;
 		this.y = 350;
 		kruguer = app.loadImage("Kruguer.png");
 		
 	}
 	
 	public void pintar(PApplet app) { // app cuenta como objeto de PApplet
+		app.imageMode(app.CENTER);
 		app.image(kruguer, x, y);
+		app.imageMode(app.CORNER);
 	}
 	
 	public void reset () {
-		this.x = 10;
+		this.x = 40;
 		this.y = 350;
 	}
 	

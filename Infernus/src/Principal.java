@@ -11,9 +11,7 @@ public class Principal extends PApplet {
 	}
 
 //INSTANCIAS
-	Kruger kruger;
-	KrugerBarco krugerB;
-	KrugerBarco sel; // el selector
+	Kruger kruger;		KrugerBarco krugerB;		KrugerBarco sel; // el selector
 	
 	Dracma oro;	Dracma plata;
 	
@@ -36,9 +34,10 @@ public class Principal extends PApplet {
 	PImage instrucciones;
 	PImage text;
 
-	boolean inicio; 
-	boolean cargando; 
+	boolean inicio; 	boolean cargando; 
+	
 	int reloj;// Para que dure cierto tiempo la imagen de cargando
+	
 //BOLEAN PARA PASAR DE UN NIVEL AL OTRO
 	int pantalla; 
 	int xDescender, yDescender, xInstrucciones, yInstrucciones;
@@ -51,6 +50,8 @@ public class Principal extends PApplet {
 	}
 
 	public void setup() {
+		puntaje = 0;
+		
 		//Coordenas del cuadro descender
 		xDescender=615;
 		yDescender=415;
@@ -89,8 +90,8 @@ public class Principal extends PApplet {
 		
 		//RECOLECTABLE DE DRACMAS
 		misDracmasPlata = new ArrayList<Dracma>();
-		misDracmasPlata.add(new Dracma(340, 0, this));
-		misDracmasPlata.add(new Dracma(640, 540, this));
+		misDracmasPlata.add(new Dracma(370, 50, this));
+		misDracmasPlata.add(new Dracma(670, 600, this));
 	
 		//Tiempo de imagen cargando
 		reloj = 0;
@@ -146,12 +147,11 @@ public class Principal extends PApplet {
 			break;
 //NIVEL 1	
 		case 2:
-			boolean visible=true;
 			uno.pintar(this);
 			kruger.pintar(this);
 			
 			textSize(20);
-			text(":" + puntaje, 1105, 55);
+			text(":" + puntaje, 1105, 70);
 			
 			for (int i = 0; i < misCaballeros.size(); i++) {
 				misCaballeros.get(i).pintar(this); // Llamo el pintar de cada clase que tenga un comportamiento
@@ -164,14 +164,13 @@ public class Principal extends PApplet {
 				if (dist(kruger.getX(), kruger.getY(), misCaballeros.get(i).getX(),misCaballeros.get(i).getY()) < 50) {//El choque y se devuelve
 					kruger.setX(10);
 				}
-				
-			if (visible==true) {	
+			}
+					
 			for (int j = 0; j < misDracmasPlata.size(); j++) {//Dracmas de plata 
-				if (visible) {
 				misDracmasPlata.get(j).pintar1(this); // Llamo el pintar de cada clase que tenga un comportamiento
-				if (dist(kruger.getX(), kruger.getY(),misDracmasPlata.get(j).getX(),misDracmasPlata.get(j).getY()) < 50) {
-						puntaje += 1;
-					}
+				
+				if (dist(kruger.getX(), kruger.getY(),misDracmasPlata.get(j).getX(),misDracmasPlata.get(j).getY()) < 10) {	
+					puntaje += 1;
 				}
 			}
 			
@@ -179,8 +178,7 @@ public class Principal extends PApplet {
 				pantalla=3;
 				kruger.reset();
 			}
-		}
-	}
+	
 			break;
 //NIVEL 2
 		case 3:
