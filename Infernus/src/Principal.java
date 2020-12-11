@@ -27,6 +27,7 @@ public class Principal extends PApplet {
 	ArrayList<Villano> misFlechas;
 	ArrayList<Dracma> misDracmasPlata;
 	ArrayList<Dracma> misDracmasPlata2;
+	ArrayList<Dracma> misDracmasOro;
 	
 //IMAGENSITAS
 	PImage inicial;
@@ -42,7 +43,7 @@ public class Principal extends PApplet {
 //BOLEAN PARA PASAR DE UN NIVEL AL OTRO
 	int pantalla; 
 	int xDescender, yDescender, xInstrucciones, yInstrucciones;
-	int puntaje;
+	int puntaje;	int puntaje2;
 	
 	
 	@Override
@@ -91,13 +92,15 @@ public class Principal extends PApplet {
 		
 		//RECOLECTABLE DE DRACMAS
 		misDracmasPlata = new ArrayList<Dracma>();
-		misDracmasPlata.add(new Dracma(370, 50, this));
-		misDracmasPlata.add(new Dracma(700, 650, this));
+		misDracmasPlata.add(new Dracma(370, 50, this));		misDracmasPlata.add(new Dracma(700, 650, this));
 		
 		misDracmasPlata2 = new ArrayList<Dracma>();
-		misDracmasPlata2.add(new Dracma(100, 100, this));
-		misDracmasPlata2.add(new Dracma(700, 650, this));
+		misDracmasPlata2.add(new Dracma(100, 100, this));	misDracmasPlata2.add(new Dracma(700, 350, this));
 		
+		misDracmasOro = new ArrayList<Dracma>();
+		misDracmasOro.add(new Dracma(100, 600, this));	misDracmasOro.add(new Dracma(800, 600, this));
+		misDracmasOro.add(new Dracma(700, 550, this));	misDracmasOro.add(new Dracma(200, 450, this));
+		misDracmasOro.add(new Dracma(400, 600, this));
 	
 		//Tiempo de imagen cargando
 		reloj = 0;
@@ -218,6 +221,20 @@ public class Principal extends PApplet {
 			kruger.pintar(this);
 			cerbero.pintar(this);
 			cerbero.mover();
+			
+			textSize(20);
+			text(":" + puntaje, 1105, 70);
+			text(":" + puntaje2, 1140, 70);
+			
+			
+			for (int i = 0; i < misDracmasOro.size(); i++) {//Dracmas de plata 
+				misDracmasOro.get(i).pintar3(this); // Llamo el pintar de cada clase que tenga un comportamiento
+				
+				if (dist(kruger.getX(), kruger.getY(),misDracmasOro.get(i).getX(),misDracmasOro.get(i).getY()) < 20) {	
+					misDracmasOro.remove(i);//Recoger dracma
+					puntaje2 += 1;//sumar dracma
+				}
+			}
 			
 			if (kruger.getX()>1050) {//INSERTAR QUE DEBE PASAR PARA SEGUIR AL OTRO NIVEL
 				pantalla=5;
