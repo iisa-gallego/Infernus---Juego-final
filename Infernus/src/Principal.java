@@ -27,6 +27,8 @@ public class Principal extends PApplet {
 	ArrayList<Villano> misCaballeros;
 	ArrayList<Villano> misRemolinos;
 	ArrayList<Villano> misFlechas;
+	ArrayList<Dracma> misDracmasPlata;
+	
 //IMAGENSITAS
 	PImage inicial;
 	PImage cargar;
@@ -40,6 +42,7 @@ public class Principal extends PApplet {
 //BOLEAN PARA PASAR DE UN NIVEL AL OTRO
 	int pantalla; 
 	int xDescender, yDescender, xInstrucciones, yInstrucciones;
+	int puntaje;
 	
 	
 	@Override
@@ -82,6 +85,12 @@ public class Principal extends PApplet {
 		misFlechas.add(new ArmaCentauro(1000, 550, this));
 		//Villano nivel 3
 		cerbero = new Cerbero(925,0,this);
+		
+		
+		//RECOLECTABLE DE DRACMAS
+		misDracmasPlata = new ArrayList<Dracma>();
+		misDracmasPlata.add(new Dracma(340, 0, this));
+		misDracmasPlata.add(new Dracma(640, 540, this));
 	
 		//Tiempo de imagen cargando
 		reloj = 0;
@@ -137,9 +146,13 @@ public class Principal extends PApplet {
 			break;
 //NIVEL 1	
 		case 2:
+			boolean visible=true;
 			uno.pintar(this);
-			plata.pintar1(this);
 			kruger.pintar(this);
+			
+			textSize(20);
+			text(":" + puntaje, 1105, 55);
+			
 			for (int i = 0; i < misCaballeros.size(); i++) {
 				misCaballeros.get(i).pintar(this); // Llamo el pintar de cada clase que tenga un comportamiento
 				misCaballeros.get(i).mover();
@@ -151,11 +164,23 @@ public class Principal extends PApplet {
 				if (dist(kruger.getX(), kruger.getY(), misCaballeros.get(i).getX(),misCaballeros.get(i).getY()) < 50) {//El choque y se devuelve
 					kruger.setX(10);
 				}
+				
+			if (visible==true) {	
+			for (int j = 0; j < misDracmasPlata.size(); j++) {//Dracmas de plata 
+				if (visible) {
+				misDracmasPlata.get(j).pintar1(this); // Llamo el pintar de cada clase que tenga un comportamiento
+				if (dist(kruger.getX(), kruger.getY(),misDracmasPlata.get(j).getX(),misDracmasPlata.get(j).getY()) < 50) {
+						puntaje += 1;
+					}
+				}
 			}
+			
 			if (kruger.getX()>1000) {
 				pantalla=3;
 				kruger.reset();
 			}
+		}
+	}
 			break;
 //NIVEL 2
 		case 3:
@@ -206,7 +231,11 @@ public class Principal extends PApplet {
 			cinco.pintar(this);
 			krugerB.pintar(this);
 			
-			if (mouseX>900) {//INSERTAR QUE DEBE PASAR PARA SEGUIR AL OTRO NIVEL
+			if (krugerB.getY()<=350) {//INSERTAR QUE DEBE PASAR PARA SEGUIR AL OTRO NIVEL
+				krugerB.setY(350);
+			}	
+			
+			if (krugerB.getX()>950) {//INSERTAR QUE DEBE PASAR PARA SEGUIR AL OTRO NIVEL
 				pantalla=7;
 				kruger.reset();
 			}	
