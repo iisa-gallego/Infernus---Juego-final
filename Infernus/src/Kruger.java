@@ -33,17 +33,31 @@ public class Kruger {
 		switch (app.key) {
 		case 'd':
 			this.x+=30;
+			if (x>1060) {
+				x=1051;
+			}
 			break;
 		case 'a':
 			this.x-=30;
+			if (x<9) {
+				x=10;
+			}
 			break;
 		case 's':
 			this.y+=30;
+			if (y>630) {
+				y=629;
+			}
 			break;
 		case 'w':
 			this.y-=30;
+			if (y<70) {
+				y=71;
+			}
 			break;
 		}
+		
+		
 	}
 	
 	public int getX() {

@@ -21,6 +21,12 @@ public class Dracma {
 		app.imageMode(app.CORNER);
 	}
 	
+	public void pintar2(PApplet app) {//Dracmas de plata del nivel 2
+		app.imageMode(app.CENTER);
+		app.image(plata, x, y);
+		app.imageMode(app.CORNER);
+	}
+	
 	public void pintar(int x, PApplet app) {
 		app.image(oro, x, y);
 	}
