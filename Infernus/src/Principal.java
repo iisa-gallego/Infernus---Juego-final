@@ -18,10 +18,13 @@ public class Principal extends PApplet {
 	Nivel3 tres; 
 	//Nivel4 cuatro;
 	Nivel5 cinco; 
-	/*Nivel6 seis; */
+	Nivel6 seis;
 	Nivel7 siete;
-	 /*siete; Nivel8 ocho; Nivel9 nueve;
-	 */
+	Nivel8 ocho; 
+	Nivel9 nueve;
+	
+	Cerbero cerbero;
+	
 //ARREGLOS
 	ArrayList<Villano> misCaballeros;
 	ArrayList<Villano> misRemolinos;
@@ -62,6 +65,8 @@ public class Principal extends PApplet {
 		misFlechas.add(new ArmaCentauro(1000, 50, this));
 		misFlechas.add(new ArmaCentauro(1000, 300, this));
 		misFlechas.add(new ArmaCentauro(1000, 550, this));
+		//Villano nivel 3
+		cerbero = new Cerbero(925,0,this);
 	
 		//Tiempo de imagen cargando
 		reloj = 0;
@@ -77,11 +82,15 @@ public class Principal extends PApplet {
 		dos = new Nivel2(0, 0, this);
 		tres = new Nivel3(0,0, this);
 		cinco = new Nivel5(0,0, this);
+		seis = new Nivel6(0, 0, this);
 		siete = new Nivel7(0, 0, this);
+		ocho = new Nivel8(0, 0, this);
+		nueve = new Nivel9(0, 0, this);
 
 	}
 
 	public void draw() {	
+
 //PANTALLA DE INICIO
 		switch (pantalla) {
 		case 0:
@@ -140,7 +149,7 @@ public class Principal extends PApplet {
 				}
 			}
 			if (kruger.getX()>1050) {
-				pantalla=6;
+				pantalla=4;
 				kruger.reset();
 			}
 			break;
@@ -148,6 +157,8 @@ public class Principal extends PApplet {
 		case 4:
 			tres.pintar(this);
 			kruger.pintar(this);
+			cerbero.pintar(this);
+			cerbero.mover();
 			
 			break;
 //NIVEL4
@@ -160,6 +171,11 @@ public class Principal extends PApplet {
 			break;
 //NIVEL6
 		case 7:
+			seis.pintar(this);
+			kruger.pintar(this);
+			break;
+//NIVEL7
+		case 8:
 			siete.pintar(this);
 			kruger.pintar(this);	
 			for (int i = 0; i < misFlechas.size(); i++) {
@@ -177,11 +193,17 @@ public class Principal extends PApplet {
 			if (kruger.getX()>1050) {
 				pantalla=8;
 				kruger.reset();
-			}
+			}		
 			break;
-//NIVEL7
-		case 8:
-						
+//NIVEL8
+		case 9:
+			ocho.pintar(this);
+			kruger.pintar(this);
+			break;
+//NIVEL9
+		case 10:
+			nueve.pintar(this);
+			kruger.pintar(this);
 			break;
 		default:
 			break;
