@@ -91,7 +91,7 @@ public class Principal extends PApplet {
 		//RECOLECTABLE DE DRACMAS
 		misDracmasPlata = new ArrayList<Dracma>();
 		misDracmasPlata.add(new Dracma(370, 50, this));
-		misDracmasPlata.add(new Dracma(670, 600, this));
+		misDracmasPlata.add(new Dracma(700, 650, this));
 	
 		//Tiempo de imagen cargando
 		reloj = 0;
@@ -166,15 +166,16 @@ public class Principal extends PApplet {
 				}
 			}
 					
-			for (int j = 0; j < misDracmasPlata.size(); j++) {//Dracmas de plata 
-				misDracmasPlata.get(j).pintar1(this); // Llamo el pintar de cada clase que tenga un comportamiento
+			for (int i = 0; i < misDracmasPlata.size(); i++) {//Dracmas de plata 
+				misDracmasPlata.get(i).pintar1(this); // Llamo el pintar de cada clase que tenga un comportamiento
 				
-				if (dist(kruger.getX(), kruger.getY(),misDracmasPlata.get(j).getX(),misDracmasPlata.get(j).getY()) < 10) {	
-					puntaje += 1;
+				if (dist(kruger.getX(), kruger.getY(),misDracmasPlata.get(i).getX(),misDracmasPlata.get(i).getY()) < 20) {	
+					misDracmasPlata.remove(i);//Recoger dracma
+					puntaje += 1;//sumar dracma
 				}
 			}
 			
-			if (kruger.getX()>1000) {
+			if (kruger.getX()>1000 && puntaje==2) {
 				pantalla=3;
 				kruger.reset();
 			}
