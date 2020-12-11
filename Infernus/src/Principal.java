@@ -35,6 +35,7 @@ public class Principal extends PApplet {
 	PImage inicial;
 	PImage cargar;
 	PImage advertencia;
+	PImage instrucciones;
 
 	boolean inicio; 
 	boolean cargando; 
@@ -88,6 +89,7 @@ public class Principal extends PApplet {
 		inicial = loadImage("Inicio.png");
 		cargar = loadImage("Cargando.png");
 		advertencia = loadImage("Cuidado.png");
+		instrucciones = loadImage("Instrucciones.png");
 
 //LAS PANTALLAS
 		inicio = true;
@@ -247,6 +249,19 @@ public class Principal extends PApplet {
 			nueve.pintar(this);
 			kruger.pintar(this);
 			break;
+//PANTALLA DE INSTRUCCIONES
+		case 11:
+			image(instrucciones, 0, 0);
+			if(dist(mouseX, mouseY, 50, 30)<30) {
+				stroke(100);
+				strokeWeight(2);
+				noFill();
+				rect(35, 25, 65, 28);
+				if(dist(mouseX, mouseY, 50, 30)<5) {
+					pantalla=0;
+				}
+			}
+			break;
 		default:
 			break;
 		}
@@ -256,6 +271,10 @@ public class Principal extends PApplet {
 		if (dist(mouseX, mouseY, 745, 415) < 50) {// botón descender/jugar
 			pantalla = 1;
 		}
+		if (dist(mouseX, mouseY, 745, 520) < 50) {// botón instrucciones
+			pantalla = 11;
+		}
+		
 		
 		if (dist(mouseX, mouseY, krugerB.getX(), krugerB.getY())<50) {
 			sel = krugerB;
