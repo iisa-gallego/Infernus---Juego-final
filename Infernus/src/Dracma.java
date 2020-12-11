@@ -33,6 +33,12 @@ public class Dracma {
 		app.imageMode(app.CORNER);
 	}
 	
+	public void pintar4(PApplet app) {//Dracmas oro del nivel 3
+		app.imageMode(app.CENTER);
+		app.image(oro, x, y);
+		app.imageMode(app.CORNER);
+	}
+	
 	public int getX() {
 		return x;
 	}
