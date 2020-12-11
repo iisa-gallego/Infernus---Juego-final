@@ -12,7 +12,7 @@ public class Nivel8 {
 		this.y = y;
 		escenario = app.loadImage("8.png");
 		
-
+//papitapapitapapitapapitapapitapapitapapitapapitapapitapapitapapitapapita
 		
 	}
 	
