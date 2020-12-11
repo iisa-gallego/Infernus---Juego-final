@@ -149,7 +149,7 @@ public class Principal extends PApplet {
 					kruger.setX(10);
 				}
 			}
-			if (kruger.getX()>1050) {
+			if (kruger.getX()>1000) {
 				pantalla=3;
 				kruger.reset();
 			}
@@ -170,7 +170,7 @@ public class Principal extends PApplet {
 					kruger.setX(10);
 				}
 			}
-			if (kruger.getX()>1050) {//INSERTAR QUE DEBE PASAR PARA SEGUIR AL OTRO NIVEL
+			if (kruger.getX()>1000) {//INSERTAR QUE DEBE PASAR PARA SEGUIR AL OTRO NIVEL
 				pantalla=4;
 				kruger.reset();
 			}
@@ -182,7 +182,7 @@ public class Principal extends PApplet {
 			cerbero.pintar(this);
 			cerbero.mover();
 			
-			if (kruger.getX()>1050) {//INSERTAR QUE DEBE PASAR PARA SEGUIR AL OTRO NIVEL
+			if (kruger.getX()>1000) {//INSERTAR QUE DEBE PASAR PARA SEGUIR AL OTRO NIVEL
 				pantalla=5;
 				kruger.reset();
 			}
@@ -193,7 +193,7 @@ public class Principal extends PApplet {
 			cuatro.pintar(this);
 			kruger.pintar(this);
 			
-			if (kruger.getX()>1050) {//INSERTAR QUE DEBE PASAR PARA SEGUIR AL OTRO NIVEL
+			if (kruger.getX()>1000) {//INSERTAR QUE DEBE PASAR PARA SEGUIR AL OTRO NIVEL
 				pantalla=6;
 				kruger.reset();
 			}	
@@ -202,13 +202,22 @@ public class Principal extends PApplet {
 		case 6:
 			cinco.pintar(this);
 			krugerB.pintar(this);
+			
+			krugerB.setX(mouseX);
+			krugerB.setY(mouseY);
+			
+			if (kruger.getX()>1000) {//INSERTAR QUE DEBE PASAR PARA SEGUIR AL OTRO NIVEL
+				pantalla=7;
+				kruger.reset();
+			}	
+			
 			break;
 //NIVEL6
 		case 7:
 			seis.pintar(this);
 			kruger.pintar(this);
 			
-			if (kruger.getX()>1050) {//INSERTAR QUE DEBE PASAR PARA SEGUIR AL OTRO NIVEL
+			if (kruger.getX()>1000) {//INSERTAR QUE DEBE PASAR PARA SEGUIR AL OTRO NIVEL
 				pantalla=8;
 				kruger.reset();
 			}	
@@ -229,7 +238,7 @@ public class Principal extends PApplet {
 					kruger.setX(10);
 				}
 			}
-			if (kruger.getX()>1050) {//INSERTAR QUE DEBE PASAR PARA SEGUIR AL OTRO NIVEL
+			if (kruger.getX()>1000) {//INSERTAR QUE DEBE PASAR PARA SEGUIR AL OTRO NIVEL
 				pantalla=8;
 				kruger.reset();
 			}		
@@ -239,7 +248,7 @@ public class Principal extends PApplet {
 			ocho.pintar(this);
 			kruger.pintar(this);
 			
-			if (kruger.getX()>1050) {//INSERTAR QUE DEBE PASAR PARA SEGUIR AL OTRO NIVEL
+			if (kruger.getX()>1000) {//INSERTAR QUE DEBE PASAR PARA SEGUIR AL OTRO NIVEL
 				pantalla=10;
 				kruger.reset();
 			}	
@@ -257,7 +266,7 @@ public class Principal extends PApplet {
 				strokeWeight(2);
 				noFill();
 				rect(35, 25, 65, 28);
-				if(dist(mouseX, mouseY, 50, 30)<5) {
+				if(dist(mouseX, mouseY, 50, 30)<10) {
 					pantalla=0;
 				}
 			}
@@ -284,8 +293,8 @@ public class Principal extends PApplet {
 	@Override
 	public void mouseDragged() {
 	if(sel!=null) {
-		krugerB.setX(mouseX);
-		krugerB.setY(mouseY);
+		sel.setX(mouseX);
+		sel.setY(mouseY);
 		}
 	}
 	

@@ -16,11 +16,6 @@ public class KrugerBarco {
 		app.image(kruguerB, x, y);
 	}
 	
-	public void reset () {
-		this.x = 10;
-		this.y = 350;
-	}
-	
 	public void mover(PApplet app) {//mover con las teclas
 	}
 	
@@ -30,10 +25,6 @@ public class KrugerBarco {
 	
 	public int getY() {
 		return y;
-	}
-
-	public PImage getKruguer() {
-		return kruguerB;
 	}
 
 	public void setX(int x) {
