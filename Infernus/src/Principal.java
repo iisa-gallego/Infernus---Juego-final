@@ -224,7 +224,7 @@ public class Principal extends PApplet {
 			
 			textSize(20);
 			text(":" + puntaje, 1105, 70);
-			text(":" + puntaje2, 1140, 70);
+			text(":" + puntaje2, 1150, 70);
 			
 			
 			for (int i = 0; i < misDracmasOro.size(); i++) {//Dracmas de plata 
