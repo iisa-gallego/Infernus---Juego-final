@@ -44,6 +44,7 @@ public class Principal extends PApplet {
 	int pantalla; 
 	int xDescender, yDescender, xInstrucciones, yInstrucciones;
 	
+	
 	@Override
 	public void settings() {
 		size(1200, 700);
@@ -53,7 +54,7 @@ public class Principal extends PApplet {
 		//Coordenas del cuadro descender
 		xDescender=615;
 		yDescender=415;
-	
+		//Coordenas del cuadro instrucciones
 		xInstrucciones=615;
 		yInstrucciones=491;
 		
@@ -194,7 +195,7 @@ public class Principal extends PApplet {
 			kruger.pintar(this);
 			
 			if (kruger.getX()>1000) {//INSERTAR QUE DEBE PASAR PARA SEGUIR AL OTRO NIVEL
-				pantalla=6;
+				pantalla=7;
 				kruger.reset();
 			}	
 			break;
@@ -202,14 +203,6 @@ public class Principal extends PApplet {
 		case 6:
 			cinco.pintar(this);
 			krugerB.pintar(this);
-			
-			krugerB.setX(mouseX);
-			krugerB.setY(mouseY);
-			
-			if (kruger.getX()>1000) {//INSERTAR QUE DEBE PASAR PARA SEGUIR AL OTRO NIVEL
-				pantalla=7;
-				kruger.reset();
-			}	
 			
 			break;
 //NIVEL6
@@ -239,7 +232,7 @@ public class Principal extends PApplet {
 				}
 			}
 			if (kruger.getX()>1000) {//INSERTAR QUE DEBE PASAR PARA SEGUIR AL OTRO NIVEL
-				pantalla=8;
+				pantalla=9;
 				kruger.reset();
 			}		
 			break;
@@ -284,8 +277,8 @@ public class Principal extends PApplet {
 			pantalla = 11;
 		}
 		
-		
-		if (dist(mouseX, mouseY, krugerB.getX(), krugerB.getY())<50) {
+	
+		if (dist(mouseX, mouseY, krugerB.getX(), krugerB.getY())<krugerB.dist()) {
 			sel = krugerB;
 		}
 	}

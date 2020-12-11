@@ -4,11 +4,13 @@ import processing.core.PImage;
 public class KrugerBarco {
 	public int x;
 	public int y;
+	public int dist;
 	PImage kruguerB;
 
 	public KrugerBarco(int x, int y, PApplet app) {// constructor
 		this.x = 10;
 		this.y = 350;
+		this.dist=30;
 		kruguerB = app.loadImage("KrugerBarco.png");
 	}
 	
@@ -25,6 +27,10 @@ public class KrugerBarco {
 	
 	public int getY() {
 		return y;
+	}
+	
+	public int dist() {
+		return dist;
 	}
 
 	public void setX(int x) {
