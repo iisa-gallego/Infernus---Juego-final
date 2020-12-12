@@ -13,7 +13,7 @@ public class Principal extends PApplet {
 //INSTANCIAS
 	Kruger kruger;		KrugerBarco krugerB;		KrugerBarco sel; // el selector
 	
-	Dracma oro;	Dracma plata;
+	Recolectable oro;	Recolectable plata;
 	
 	Nivel1 uno; 	Nivel2 dos;		 Nivel3 tres; 
 	Nivel4 cuatro;	Nivel5 cinco;	 Nivel6 seis;
@@ -21,14 +21,16 @@ public class Principal extends PApplet {
 	
 	Cerbero cerbero;
 	
+	Llave llave;
+	
 //ARREGLOS
 	ArrayList<Villano> misCaballeros;
 	ArrayList<Villano> misRemolinos;
 	ArrayList<Villano> misFlechas;
-	ArrayList<Dracma> misDracmasPlata;
-	ArrayList<Dracma> misDracmasPlata2;
-	ArrayList<Dracma> misDracmasOro;
-	ArrayList<Dracma> misDracmasOro2;
+	ArrayList<Recolectable> misDracmasPlata;
+	ArrayList<Recolectable> misDracmasPlata2;
+	ArrayList<Recolectable> misDracmasOro;
+	ArrayList<Recolectable> misDracmasOro2;
 	
 //IMAGENSITAS
 	PImage inicial;
@@ -38,8 +40,8 @@ public class Principal extends PApplet {
 	PImage text;
 
 	boolean inicio; 	boolean cargando; 
-	
 	int reloj;// Para que dure cierto tiempo la imagen de cargando
+	boolean recogioLlave=false;
 	
 //BOLEAN PARA PASAR DE UN NIVEL AL OTRO
 	int pantalla; 
@@ -67,8 +69,8 @@ public class Principal extends PApplet {
 		
 		sel = null;
 	
-		plata = new Dracma (0 ,0, this);
-		oro = new Dracma (0,0,this);
+		plata = new Recolectable (0 ,0, this);
+		oro = new Recolectable (0,0,this);
 		
 		// Villano nivel 1
 		misCaballeros = new ArrayList<Villano>();
@@ -88,24 +90,27 @@ public class Principal extends PApplet {
 		misFlechas.add(new ArmaCentauro(1000, 300, this));
 		misFlechas.add(new ArmaCentauro(1000, 550, this));
 		//Villano nivel 3
+		
 		cerbero = new Cerbero(925,0,this);
 		
-		
 		//RECOLECTABLE DE DRACMAS
-		misDracmasPlata = new ArrayList<Dracma>();
-		misDracmasPlata.add(new Dracma(370, 50, this));		misDracmasPlata.add(new Dracma(700, 650, this));
+		misDracmasPlata = new ArrayList<Recolectable>();
+		misDracmasPlata.add(new Recolectable(370, 50, this));		misDracmasPlata.add(new Recolectable(700, 650, this));
 		
-		misDracmasPlata2 = new ArrayList<Dracma>();
-		misDracmasPlata2.add(new Dracma(100, 100, this));	misDracmasPlata2.add(new Dracma(700, 350, this));
+		misDracmasPlata2 = new ArrayList<Recolectable>();
+		misDracmasPlata2.add(new Recolectable(100, 100, this));	misDracmasPlata2.add(new Recolectable(700, 350, this));
 		
-		misDracmasOro = new ArrayList<Dracma>();
-		misDracmasOro.add(new Dracma(100, 600, this));	misDracmasOro.add(new Dracma(800, 600, this));
-		misDracmasOro.add(new Dracma(700, 550, this));	misDracmasOro.add(new Dracma(200, 450, this));
-		misDracmasOro.add(new Dracma(400, 600, this));
+		misDracmasOro = new ArrayList<Recolectable>();
+		misDracmasOro.add(new Recolectable(100, 600, this));	misDracmasOro.add(new Recolectable(800, 600, this));
+		misDracmasOro.add(new Recolectable(700, 550, this));	misDracmasOro.add(new Recolectable(200, 450, this));
+		misDracmasOro.add(new Recolectable(400, 600, this));
 	
-		misDracmasOro2 = new ArrayList<Dracma>();
-		misDracmasOro2.add(new Dracma(350, 250, this));
-		misDracmasOro2.add(new Dracma(700, 150, this));
+		misDracmasOro2 = new ArrayList<Recolectable>();
+		misDracmasOro2.add(new Recolectable(280, 250, this));
+		misDracmasOro2.add(new Recolectable(730, 480, this));
+		
+		llave = new Llave(0,0,this);
+		
 		
 		//Tiempo de imagen cargando
 		reloj = 0;
@@ -132,6 +137,7 @@ public class Principal extends PApplet {
 	}
 
 	public void draw() {	
+	
 //PANTALLA DE INICIO
 		switch (pantalla) {
 		case 0:
@@ -249,14 +255,24 @@ public class Principal extends PApplet {
 			break;
 //NIVEL4
 		case 5:
+			if (recogioLlave==true) {
+				llave.setX(1100);
+				llave.setY(600);
+			}
+			
 			cuatro.pintar(this);
+			llave.pintar(this);
 			kruger.pintar(this);
 			
 			textSize(20);
 			text(":" + puntaje, 1105, 70);
 			text(":" + puntaje2, 1150, 70);
 			
-			if (kruger.getX()>1050) {//INSERTAR QUE DEBE PASAR PARA SEGUIR AL OTRO NIVEL
+			if (dist(kruger.getX(), kruger.getY(),llave.getX(), llave.getY()) < 50) {//Recolectar la llave	
+				recogioLlave=true;
+			}
+			
+			if (kruger.getX()>1050 && recogioLlave) {//INSERTAR QUE DEBE PASAR PARA SEGUIR AL OTRO NIVEL
 				pantalla=6;
 				kruger.reset();
 			}	

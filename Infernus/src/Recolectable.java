@@ -1,20 +1,23 @@
 import processing.core.PApplet;
 import processing.core.PImage;
 
-public class Dracma {
+public class Recolectable {
 	
 	public int x;
 	public int y;
+
+
 	PImage plata;
 	PImage oro;
 
-	public Dracma (int x, int y,PApplet app) {
+	public Recolectable (int x, int y,PApplet app) {
 		this.x = x;
 		this.y = y;
+		
 		plata = app.loadImage("DracmaPlata.png");
 		oro = app.loadImage("DracmaOro.png");
 	}
-
+//DRACMAS
 	public void pintar1(PApplet app) {//Dracmas de plata del nivel 1
 		app.imageMode(app.CENTER);
 		app.image(plata, x, y);
@@ -49,4 +52,8 @@ public class Dracma {
 	public void setY(int y) {
 		this.y = y;
 	}
+	
+	
+//CHISPAS
+	
 }
