@@ -20,6 +20,7 @@ public class Principal extends PApplet {
 	Nivel7 siete;	Nivel8 ocho; 	 Nivel9 nueve;
 	
 	Cerbero cerbero;
+	FuriaInfernal furia;
 	
 	Llave llave;
 	
@@ -31,6 +32,7 @@ public class Principal extends PApplet {
 	ArrayList<Recolectable> misDracmasPlata2;
 	ArrayList<Recolectable> misDracmasOro;
 	ArrayList<Recolectable> misDracmasOro2;
+	PImage vida;
 	
 //IMAGENSITAS
 	PImage inicial;
@@ -38,10 +40,14 @@ public class Principal extends PApplet {
 	PImage advertencia;
 	PImage instrucciones;
 	PImage text;
+	
+	int tInvulnerabilida = 0;
 
 	boolean inicio; 	boolean cargando; 
 	int reloj;// Para que dure cierto tiempo la imagen de cargando
+	int nVidas;
 	boolean recogioLlave=false;
+	boolean vulnerabilidad = true;
 	
 //BOLEAN PARA PASAR DE UN NIVEL AL OTRO
 	int pantalla; 
@@ -56,7 +62,7 @@ public class Principal extends PApplet {
 
 	public void setup() {
 		puntaje = 0;
-		
+		nVidas = 5;
 		//Coordenas del cuadro descender
 		xDescender=615;
 		yDescender=415;
@@ -66,6 +72,8 @@ public class Principal extends PApplet {
 		
 		kruger = new Kruger(0, 0, this); // Declarar la instancia
 		krugerB = new KrugerBarco (0,0, this);
+		
+		furia = new FuriaInfernal(450, 70, this); // Declarar la instancia
 		
 		sel = null;
 	
@@ -133,6 +141,9 @@ public class Principal extends PApplet {
 		siete = new Nivel7(0, 0, this);
 		ocho = new Nivel8(0, 0, this);
 		nueve = new Nivel9(0, 0, this);
+		
+		vida = loadImage("BolitaFuego.png");
+		pantalla = 4;
 
 	}
 
@@ -173,6 +184,7 @@ public class Principal extends PApplet {
 				}
 
 				if (dist(kruger.getX(), kruger.getY(), misCaballeros.get(i).getX(),misCaballeros.get(i).getY()) < 60) {//El choque y se devuelve
+					nVidas -= 1;
 					kruger.setX(10);
 				}
 			}
@@ -209,6 +221,11 @@ public class Principal extends PApplet {
 				}
 				
 				if (dist(kruger.getX(), kruger.getY(), misRemolinos.get(i).getX(),misRemolinos.get(i).getY()) < 50) {//El choque y se devuelve
+					if (vulnerabilidad) {
+						nVidas -= 1;
+						vulnerabilidad = false;
+					}
+					
 					kruger.setX(10);
 				}
 			}
@@ -232,6 +249,10 @@ public class Principal extends PApplet {
 			kruger.pintar(this);
 			cerbero.pintar(this);
 			cerbero.mover();
+			if(cerbero.validar(kruger.getX(), kruger.getY())) {
+				nVidas -= 1;
+				kruger.reset();
+			}			
 			
 			textSize(20);
 			text(":" + puntaje, 1105, 70);
@@ -259,10 +280,16 @@ public class Principal extends PApplet {
 				llave.setX(1100);
 				llave.setY(600);
 			}
-			
+					
 			cuatro.pintar(this);
 			llave.pintar(this);
 			kruger.pintar(this);
+			furia.pintar();
+			furia.mover();
+			if(furia.validar(kruger.getX(), kruger.getY())) {
+				nVidas -= 1;
+				kruger.reset();
+			}
 			
 			textSize(20);
 			text(":" + puntaje, 1105, 70);
@@ -281,6 +308,7 @@ public class Principal extends PApplet {
 		case 6:
 			cinco.pintar(this);
 			krugerB.pintar(this);
+			
 			
 			textSize(20);
 			text(":" + puntaje, 1105, 70);
@@ -383,6 +411,18 @@ public class Principal extends PApplet {
 			break;
 		default:
 			break;
+		}
+		
+		for (int i = 0; i < nVidas; i++) {
+			image(vida, 1100 + (20*i), 500);
+		}
+		
+		if (!vulnerabilidad) {
+			tInvulnerabilida ++;
+			if (tInvulnerabilida == 100) {
+				vulnerabilidad = true;
+				tInvulnerabilida = 0;
+			}
 		}
 	}
 

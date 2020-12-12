@@ -3,52 +3,51 @@ import java.util.ArrayList;
 import processing.core.PApplet;
 import processing.core.PImage;
 
-public class Cerbero extends Villano {
-	PImage cerbero;
-	protected boolean estado0, estado1;
-	ArrayList<FuriaFireBall> fireballs;
-	PApplet app;
-	
-	public Cerbero(int x, int y,PApplet app) {
-		super(x, y);
-		cerbero = app.loadImage("Cerbero.png");
-		this.estado0 = true;
-		this.estado1 = false;
-		this.app = app;
-		fireballs = new ArrayList<FuriaFireBall>();
-	}
+public class FuriaInfernal {
 
-	@Override
-	public void pintar(PApplet app) {
-		app.image(cerbero, x, y);
+	public int x;
+	public int y;
+	public int dist;
+	public int vel;
+	PApplet app;
+	PImage Furia;
+	ArrayList<FuriaFireBall> fireballs;
+
+	public FuriaInfernal(int x, int y, PApplet app) {
+		// TODO Auto-generated constructor stub
+		this.app = app;
+		this.x = x;
+		this.y = y;
+		this.dist=50;
+		vel = 5;
+		fireballs = new ArrayList<FuriaFireBall>();
+		//Furia = app.loadImage("Furia.png");
+	}
+	
+	public void pintar() { // app cuenta como objeto de PApplet
+		app.fill(255,0,0);
+		app.ellipse(x, y, 50, 50);
 		for (int i = 0; i < fireballs.size(); i++) {
 			fireballs.get(i).pintar();
 			fireballs.get(i).mover();
 		}
 		generarEnmigos();
 		eliminarEnemigos();
-		
+		//app.imageMode(app.CENTER);
+		//app.image(Furia, x, y);
+		//app.imageMode(app.CORNER);
 	}
-	public void mover() {
-		if (estado0) {
-			estado1 = false;
-			y += 5;
-			if (y >= 550) {
-				estado1 = true;
-			}
-		}
-		if (estado1) {
-			estado0 = false;
-			y -= 5;
-			if (y <= 20) {
-				estado0 = true;
-			}
+	
+	public void mover() {//mover con las teclas
+		this.x += vel;
+		if(this.x < 25 || this.x > this.app.width - this.app.width*0.15) {
+			this.vel *= -1;
 		}
 	}
 	
 	public void generarEnmigos() {
 		if (app.frameCount%120 == 0) {
-			fireballs.add(new FuriaFireBall(x, y, app,2));
+			fireballs.add(new FuriaFireBall(x, y, app,1));
 		}
 	}
 	
@@ -70,11 +69,27 @@ public class Cerbero extends Villano {
 		}
 		return false;
 	}
-
+	
 	public int getX() {
 		return x;
 	}
+	
 	public int getY() {
 		return y;
 	}
+	
+	public int dist() {
+		return dist;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+	
+	
+
 }
